@@ -29,7 +29,27 @@ jobs:
       - name: Build Windows
         run: flutter build windows --release
 
-      - name: Upload artifact
+      - name: Run and Screenshot
+        run: |
+          $exePath = "build/windows/x64/runner/Release/darling_cloud.exe"
+          Start-Process -FilePath $exePath -WorkingDirectory "build/windows/x64/runner/Release"
+          Start-Sleep -Seconds 8
+          Add-Type -AssemblyName System.Windows.Forms
+          Add-Type -AssemblyName System.Drawing
+          $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+          $bitmap = New-Object System.Drawing.Bitmap($screen.Width, $screen.Height)
+          $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+          $graphics.CopyFromScreen($screen.Location, [System.Drawing.Point]::Empty, $screen.Size)
+          $bitmap.Save("screenshot.png")
+          Write-Host "Screenshot saved"
+
+      - name: Upload screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: darling-screenshot
+          path: screenshot.png
+
+      - name: Upload exe
         uses: actions/upload-artifact@v4
         with:
           name: darling-cloud-windows
