@@ -4,9 +4,6 @@ on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      CMAKE_GENERATOR: "Visual Studio 17 2022"
-      CMAKE_GENERATOR_PLATFORM: x64
     steps:
       - uses: actions/checkout@v4
 
@@ -24,8 +21,15 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Check VS installations
+        run: |
+          & "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -products * -property displayName
+          where.exe cmake
+
       - name: Build Windows
-        run: flutter build windows --release
+        run: flutter build windows --release --verbose
+        env:
+          CMAKE_GENERATOR: "Visual Studio 17 2022"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
