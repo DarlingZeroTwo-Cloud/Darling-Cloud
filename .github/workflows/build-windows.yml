@@ -18,18 +18,16 @@ jobs:
         with:
           targets: x86_64-pc-windows-msvc
 
+      - name: Install VS 2019 Build Tools
+        run: |
+          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive" --no-progress --limit-output
+        continue-on-error: true
+
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Check VS installations
-        run: |
-          & "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -products * -property displayName
-          where.exe cmake
-
       - name: Build Windows
-        run: flutter build windows --release --verbose
-        env:
-          CMAKE_GENERATOR: "Visual Studio 17 2022"
+        run: flutter build windows --release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
