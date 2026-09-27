@@ -31,9 +31,10 @@ jobs:
 
       - name: Run and Screenshot
         run: |
-          $exePath = "build/windows/x64/runner/Release/darling_cloud.exe"
-          Start-Process -FilePath $exePath -WorkingDirectory "build/windows/x64/runner/Release"
-          Start-Sleep -Seconds 8
+          $releaseDir = "build/windows/x64/runner/Release"
+          $exePath = "$releaseDir/darling_cloud.exe"
+          Start-Process -FilePath $exePath -WorkingDirectory $releaseDir
+          Start-Sleep -Seconds 10
           Add-Type -AssemblyName System.Windows.Forms
           Add-Type -AssemblyName System.Drawing
           $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
