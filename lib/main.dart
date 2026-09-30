@@ -720,7 +720,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
                 return Container(
                   color: index % 2 == 0
                       ? Theme.of(context).colorScheme.surface
-                      : Theme.of(context).colorScheme.surfaceContainerHighest,
+                      : Theme.of(context).colorScheme.surfaceVariant,
                   child: ListTile(
                     title: InkWell(
                         onTap: () {

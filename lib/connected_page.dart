@@ -373,7 +373,7 @@ class DeviceList extends StatelessWidget {
       child: Container(
         color: deviceList.indexOf(device) % 2 == 0
             ? Theme.of(context).colorScheme.surface
-            : Theme.of(context).colorScheme.surfaceContainerHighest,
+            : Theme.of(context).colorScheme.surfaceVariant,
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
@@ -411,7 +411,7 @@ class RouteList extends StatelessWidget {
           child: ListView.builder(
             itemCount: routeList.length,
             itemBuilder: (context, index) {
-              return _buildRouteRow(routeList[index]);
+              return _buildRouteRow(context, routeList[index]);
             },
           ),
         ),
@@ -438,12 +438,12 @@ class RouteList extends StatelessWidget {
     );
   }
 
-  Widget _buildRouteRow(Map<String, String> route) {
+  Widget _buildRouteRow(BuildContext context, Map<String, String> route) {
     return Container(
       color:
           routeList.indexOf(route) % 2 == 0
               ? Theme.of(context).colorScheme.surface
-              : Theme.of(context).colorScheme.surfaceContainerHighest,
+              : Theme.of(context).colorScheme.surfaceVariant,
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
