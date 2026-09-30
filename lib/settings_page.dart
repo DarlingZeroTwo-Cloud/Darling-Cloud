@@ -285,7 +285,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 underline: Container(
                   height: 0,
                 ),
-                dropdownColor: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

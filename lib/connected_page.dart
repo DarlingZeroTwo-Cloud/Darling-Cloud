@@ -110,14 +110,13 @@ class _ConnectDetailPageState extends State<ConnectDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: const Text('组网', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF1E1E1E),
+        title: const Text('组网'),
         actions: [
           if (!Platform.isAndroid)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: IconButton(
-                icon: const Text('日志', style: TextStyle(color: Colors.white)),
+                icon: const Text('日志'),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -131,21 +130,21 @@ class _ConnectDetailPageState extends State<ConnectDetailPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: IconButton(
-              icon: const Icon(Icons.wysiwyg, color: Colors.white),
+              icon: const Icon(Icons.wysiwyg),
               onPressed: _showCurrentDeviceDialog,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: IconButton(
-              icon: const Icon(Icons.info, color: Colors.white),
+              icon: const Icon(Icons.info),
               onPressed: _showConfigDialog,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: IconButton(
-              icon: const Icon(Icons.link_off, color: Colors.white),
+              icon: const Icon(Icons.link_off),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -373,8 +372,8 @@ class DeviceList extends StatelessWidget {
       },
       child: Container(
         color: deviceList.indexOf(device) % 2 == 0
-            ? Colors.grey[200]
-            : Colors.white,
+            ? Theme.of(context).colorScheme.surface
+            : Theme.of(context).colorScheme.surfaceContainerHighest,
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
@@ -442,7 +441,9 @@ class RouteList extends StatelessWidget {
   Widget _buildRouteRow(Map<String, String> route) {
     return Container(
       color:
-          routeList.indexOf(route) % 2 == 0 ? Colors.grey[200] : Colors.white,
+          routeList.indexOf(route) % 2 == 0
+              ? Theme.of(context).colorScheme.surface
+              : Theme.of(context).colorScheme.surfaceContainerHighest,
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [

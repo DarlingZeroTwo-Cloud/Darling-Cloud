@@ -61,22 +61,22 @@ class VntApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '',
+      title: 'Darling Cloud',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.grey,
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1E1E1E),
-          foregroundColor: Colors.white,
-          elevation: 0,
-        ),
-        colorScheme: ColorScheme.dark(
-          primary: Colors.grey.shade400,
-          secondary: Colors.grey.shade600,
-          surface: const Color(0xFF1E1E1E),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blueGrey,
+          brightness: Brightness.light,
         ),
       ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blueGrey,
+          brightness: Brightness.dark,
+        ),
+      ),
+      themeMode: ThemeMode.system,
       home: PopScope(
           canPop: false,
           onPopInvoked: (didPop) {
@@ -648,15 +648,14 @@ class _HomePageState extends State<HomePage> with WindowListener {
       appBar: CustomAppBar(
         title: Text(
             vntManager.hasConnection() ? '已连接:${vntManager.size()}' : '',
-            style: const TextStyle(fontSize: 16, color: Colors.white)),
-        backgroundColor: const Color(0xFF1E1E1E),
+            style: const TextStyle(fontSize: 16)),
         actions: [
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Tooltip(
                   message: '设置',
                   child: IconButton(
-                    icon: const Icon(Icons.settings, color: Colors.white),
+                    icon: const Icon(Icons.settings),
                     onPressed: () async {
                       await Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => SettingsPage()),
@@ -670,8 +669,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
                 child: Tooltip(
                     message: '隐藏到托盘',
                     child: IconButton(
-                      icon: const Icon(Icons.push_pin_outlined,
-                          color: Colors.white),
+                      icon: const Icon(Icons.push_pin_outlined),
                       onPressed: () {
                         appWindow.hide();
                       },
@@ -683,7 +681,10 @@ class _HomePageState extends State<HomePage> with WindowListener {
                     message: 'Darling Cloud 网络',
                     child: ColorChangingButton(
                       icon: Icons.attractions,
-                      colors: const [Colors.white, Colors.yellow],
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
+                      ],
                       onPressed: _seeConnected,
                     ))),
           Padding(
@@ -691,7 +692,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
               child: Tooltip(
                   message: '关于 Darling Cloud',
                   child: IconButton(
-                    icon: const Icon(Icons.info, color: Colors.white),
+                    icon: const Icon(Icons.info),
                     onPressed: _navigateToAboutPage,
                   ))),
           Padding(
@@ -699,7 +700,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
               child: Tooltip(
                   message: '添加配置',
                   child: IconButton(
-                    icon: const Icon(Icons.add, color: Colors.white),
+                    icon: const Icon(Icons.add),
                     onPressed: () => _addOrEditConfig(null, -1),
                   ))),
         ],
@@ -708,7 +709,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
           ? const Center(
               child: Text(
                 '点击右上角添加一个组网配置',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                style: TextStyle(fontSize: 16),
               ),
             )
           : ListView.builder(
@@ -717,7 +718,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
                 var item = _configs[index];
                 var connected = vntManager.hasConnectionItem(item.itemKey);
                 return Container(
-                  color: index % 2 == 0 ? Colors.grey[200] : Colors.white,
+                  color: index % 2 == 0
+                      ? Theme.of(context).colorScheme.surface
+                      : Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: ListTile(
                     title: InkWell(
                         onTap: () {

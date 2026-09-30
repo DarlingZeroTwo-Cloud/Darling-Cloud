@@ -259,25 +259,14 @@ class _NetworkConfigInputPageState extends State<NetworkConfigInputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: const Text('组网参数配置', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF1E1E1E),
+        title: const Text('组网参数配置'),
         actions: [
-          // if (widget.config == null)
-          //   Padding(
-          //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          //       child: Tooltip(
-          //           message: '导入',
-          //           child: IconButton(
-          //             icon:
-          //                 const Icon(Icons.call_received, color: Colors.white),
-          //             onPressed: _showImportConfigDialog,
-          //           ))),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Tooltip(
                   message: '保存',
                   child: IconButton(
-                    icon: const Icon(Icons.save, color: Colors.white),
+                    icon: const Icon(Icons.save),
                     onPressed: _submitForm,
                   ))),
         ],
