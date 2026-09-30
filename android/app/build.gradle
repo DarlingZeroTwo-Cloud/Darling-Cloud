@@ -48,18 +48,9 @@ android {
         versionName "1.2.13"
     }
 
-    signingConfigs {
-        release {
-            storeFile file("/home/user/Doubao/chats/38444192684688130/release-mod/darling.keystore")
-            storePassword "darlingcloud"
-            keyAlias "darling"
-            keyPassword "darlingcloud"
-        }
-    }
-
     buildTypes {
         release {
-            signingConfig = signingConfigs.release
+            signingConfig = signingConfigs.debug
             minifyEnabled false
             shrinkResources false
         }
